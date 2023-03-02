@@ -6,18 +6,12 @@ import Seo from "../components/seo"
 import * as styles from "../components/index.module.css"
 
 const AboutPage = () => (
-  <Layout>
-    <div className={styles.textCenter}>
-      
-      <h1>
-        About us..
-      </h1>
-      
-    </div>
+  <Layout pageTitle="About us">
+   <Seo title="About" keywords={['gatsby', 'application', 'react']} />
+   <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla illo, odio nostrum cupiditate enim reiciendis odit voluptatum possimus optio est quibusdam perspiciatis assumenda et amet reprehenderit consequuntur quis impedit non a unde? Aliquid dolores ipsa iste? Vitae facilis quam iste.</p>
   </Layout>
 )
 
 
-export const Head = () => <Seo title="About" />
 
 export default AboutPage

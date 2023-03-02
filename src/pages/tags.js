@@ -5,18 +5,11 @@ import Seo from "../components/seo"
 import * as styles from "../components/index.module.css"
 
 const TagsPage = () => (
-  <Layout>
-    <div className={styles.textCenter}>
-      
-      <h1>
-        Tags page
-      </h1>
-      
-    </div>
+  <Layout pageTitle="All topics">
+   <Seo title="Tags" keywords={['gatsby', 'application', 'react']} /> 
   </Layout>
 )
 
 
-export const Head = () => <Seo title="Tags" />
 
 export default TagsPage 

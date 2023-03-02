@@ -33,6 +33,7 @@ module.exports = {
       },
     },
     `gatsby-transformer-sharp`,
+    `gatsby-image`,
     `gatsby-transformer-remark`,
     `gatsby-plugin-sharp`,
     {

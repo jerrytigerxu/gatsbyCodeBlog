@@ -6,18 +6,11 @@ import Seo from "../components/seo"
 import * as styles from "../components/index.module.css"
 
 const TeamPage = () => (
-  <Layout>
-    <div className={styles.textCenter}>
-      
-      <h1>
-        Team Page
-      </h1>
-      
-    </div>
+  <Layout pageTitle="Our Team">
+   <Seo title="Team" keywords={['gatsby', 'application', 'react']} /> 
   </Layout>
 )
 
 
-export const Head = () => <Seo title="Team" />
 
 export default TeamPage

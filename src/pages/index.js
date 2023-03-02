@@ -2,34 +2,63 @@ import * as React from "react"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 import * as styles from "../components/index.module.css"
-import { graphql, StaticQuery } from "gatsby"
+import { graphql, useStaticQuery } from "gatsby"
 import Post from '../components/Post'
 
-const IndexPage = () => (
-  <Layout>
-    <div className={styles.textCenter}>
-      
-      <h1>
-        Home Page
-      </h1>
-      <StaticQuery query={indexQuery} render={data => {
-        return (
-          <div> 
-            {data.allMarkdownRemark.edges.map(({ node }) => (
-              <Post title={node.frontmatter.title}
-                author={node.frontmatter.author}
-                path={node.frontmatter.path}
-                date={node.frontmatter.date}
-                body={node.excerpt}
-              />
-            ))}
-          </div>
-        )
-      }}/>
-      
-    </div>
-  </Layout>
-)
+
+const IndexPage = () => {
+
+  const data = useStaticQuery(graphql`
+      query ProjectsQuery {
+        allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC}) {
+          edges {
+            node {
+              id 
+              frontmatter {
+                title
+                date(formatString: "MMM Do YYYY")
+                author
+                tags
+                image {
+                  childImageSharp {
+                    fluid(maxWidth: 1000){
+                      ...GatsbyImageSharpFluid
+                    }
+                  }
+                }
+              }
+              fields {
+                slug
+              }
+              excerpt
+            }
+          }
+      }
+    }
+  `)
+  return (
+    <Layout pageTitle="CodeBlog">
+      <div className={styles.textCenter}>
+        
+        <div> 
+          {data.allMarkdownRemark.edges.map(({ node }) => (
+            <Post 
+              key={node.id}
+              title={node.frontmatter.title}
+              author={node.frontmatter.author}
+              slug={node.fields.slug}
+              date={node.frontmatter.date}
+              body={node.excerpt}
+              fluid={node.frontmatter.image.childImageSharp.fluid}
+              tags={node.frontmatter.tags}
+            />
+          ))}
+        </div>
+      </div>
+    </Layout>
+  )
+}
+
 
 
 const indexQuery = graphql`
@@ -42,7 +71,17 @@ const indexQuery = graphql`
             title
             date(formatString: "MMM Do YYYY")
             author
-            path
+            tags
+            image {
+              childImageSharp {
+                fluid(maxWidth: 1000){
+                  ...GatsbyImageSharpFluid
+                }
+              }
+            }
+          }
+          fields {
+            slug
           }
           excerpt
         }
