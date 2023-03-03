@@ -4,15 +4,21 @@ import Seo from "../components/seo"
 import * as styles from "../components/index.module.css"
 import { graphql, useStaticQuery } from "gatsby"
 import Post from '../components/Post'
+import PaginationLinks from "../components/PaginationLinks"
 
 
 const IndexPage = () => {
+
+
+  const postsPerPage = 2;
+  
 
   const data = useStaticQuery(graphql`
       query ProjectsQuery {
         allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC}
           limit:2
           ) {
+          totalCount
           edges {
             node {
               id 
@@ -38,6 +44,8 @@ const IndexPage = () => {
       }
     }
   `)
+
+
   return (
     <Layout pageTitle="CodeBlog">
       <div className={styles.textCenter}>
@@ -55,6 +63,7 @@ const IndexPage = () => {
               tags={node.frontmatter.tags}
             />
           ))}
+          <PaginationLinks currentPage={1} numberOfPages={Math.ceil(data.allMarkdownRemark.totalCount / postsPerPage)}/>
         </div>
       </div>
     </Layout>
