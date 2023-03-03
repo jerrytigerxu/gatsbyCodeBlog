@@ -7,7 +7,7 @@ import authors from '../util/authors'
 const authorPosts = ({ data, pageContext }) => {
     const { totalCount } = data.allMarkdownRemark 
     const author = authors.find(x => x.name === pageContext.authorName)
-    const pageHeader = `${totalCount} Posts by ${pageContext.authorName}`
+    const pageHeader = `${totalCount} Post${(totalCount === 1) ? '' : 's'} by: ${pageContext.authorName}`
     
   return (
     <Layout pageTitle={pageHeader} postAuthor={author} authorImageFluid={data.file.childImageSharp.fluid}>
