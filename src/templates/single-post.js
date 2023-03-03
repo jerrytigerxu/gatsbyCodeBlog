@@ -37,7 +37,7 @@ const SinglePost = ( {data, pageContext} ) => {
                     {post.tags.map(tag => (
                         <li key={tag}>
                             <Link to={`/tag/${slugify(tag)}`}>
-                                <Badge color="primary">{tag}</Badge>
+                                <Badge bg="primary">{tag}</Badge>
                             </Link>
                         </li>
                     ))}
