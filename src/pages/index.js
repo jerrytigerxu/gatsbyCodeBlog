@@ -10,7 +10,9 @@ const IndexPage = () => {
 
   const data = useStaticQuery(graphql`
       query ProjectsQuery {
-        allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC}) {
+        allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC}
+          limit:2
+          ) {
           edges {
             node {
               id 
