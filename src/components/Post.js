@@ -23,7 +23,7 @@ export default function Post({ title, author, slug, fluid, date, body, tags }) {
                 {tags.map(tag => (
                     <li key={tag}>
                         <Link to={`/tag/${slugify(tag)}`}>
-                            <Badge bg="primary" className="text-uppercase">{tag}</Badge>
+                            <Badge color="primary" className="text-uppercase">{tag}</Badge>
                         </Link>
                     </li>
                 ))}
